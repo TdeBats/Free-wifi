@@ -4,53 +4,78 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Free Bos wifi</title>
-
 <style>
-body{
-    margin:0;
-    background:black;
-    color:white;
+body {
+    margin: 0;
+    background: black;
+    color: white;
     font-family: Arial, sans-serif;
-    text-align:center;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-#loading{
-    font-size:28px;
+#loading {
+    font-size: 28px;
 }
-
-video{
-    width:100%;
-    height:100vh;
-    object-fit:cover;
-    display:none;
+#connectBtn {
+    margin-top: 30px;
+    padding: 14px 32px;
+    font-size: 20px;
+    background: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+#status {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #aaa;
+    display: none;
+}
+video {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    display: none;
 }
 </style>
 </head>
-
 <body>
 
 <div id="loading">
-🔐Wachtwoord synchroniseren<br>
+    🔐 Free Bos WiFi<br><br>
+    <button id="connectBtn" onclick="startConnect()">Verbinden</button>
+    <div id="status">Wachtwoord synchroniseren...</div>
 </div>
 
-<video id="rickVideo" playsinline muted>
+<video id="rickVideo" playsinline>
     <source src="rick.mp4" type="video/mp4">
 </video>
 
 <script>
-setTimeout(()=>{
-    document.getElementById("loading").style.display="none";
+function startConnect() {
+    document.getElementById("connectBtn").style.display = "none";
+    document.getElementById("status").style.display = "block";
 
     const video = document.getElementById("rickVideo");
-    video.style.display = "block";
 
-    video.play().catch(()=>{});
+    // Preload triggered by user gesture — unlocks audio
+    video.load();
 
-}, 3000);
+    setTimeout(() => {
+        document.getElementById("loading").style.display = "none";
+        video.style.display = "block";
+        video.muted = false;
+        video.play().catch(() => {
+            // Fallback: play muted if still blocked
+            video.muted = true;
+            video.play();
+        });
+    }, 3000);
+}
 </script>
 
 </body>
