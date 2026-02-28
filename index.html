@@ -1,14 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
-    <title>Secure Identity Verification</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="background:black; color:white; text-align:center; font-family:Arial;">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Verification</title>
 
-    <video autoplay playsinline controls width="90%">
-        <source src="rick.mp4" type="video/mp4">
-    </video>
+<style>
+body{
+    margin:0;
+    background:black;
+    color:white;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#loading{
+    font-size:28px;
+}
+
+video{
+    width:100%;
+    height:100vh;
+    object-fit:cover;
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div id="loading">
+🔐 Verifying identity...<br>
+Connecting to secure network...
+</div>
+
+<video id="rickVideo" playsinline muted>
+    <source src="rick.mp4" type="video/mp4">
+</video>
+
+<script>
+setTimeout(()=>{
+    document.getElementById("loading").style.display="none";
+
+    const video = document.getElementById("rickVideo");
+    video.style.display = "block";
+
+    video.play().catch(()=>{});
+
+}, 3000);
+</script>
 
 </body>
 </html>
