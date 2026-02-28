@@ -9,34 +9,53 @@
 body{
     margin:0;
     background:black;
+    color:white;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
+}
+
+#loading{
+    font-size:28px;
 }
 
 video{
     width:100%;
     height:100vh;
     object-fit:cover;
+    display:none;
 }
 </style>
 </head>
 
 <body>
 
-<video id="rickVideo" playsinline controls>
+<div id="loading">
+🔐 Verifying identity...<br>
+Connecting to secure network...
+</div>
+
+<video id="rickVideo" playsinline muted>
     <source src="rick.mp4" type="video/mp4">
 </video>
 
 <script>
-const video = document.getElementById("rickVideo");
+setTimeout(()=>{
+    document.getElementById("loading").style.display="none";
 
-document.body.addEventListener("click", () => {
-    video.muted = false;
+    const video = document.getElementById("rickVideo");
+    video.style.display = "block";
+
     video.play().catch(()=>{});
-}, { once:true });
+
+}, 3000);
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
